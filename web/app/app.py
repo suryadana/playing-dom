@@ -4,8 +4,9 @@ app = Flask(__name__, template_folder="templates")
 
 @app.route('/js/<path:path>')
 def send_js(path):
-    if request.accept_languages:
-        return send_from_directory('js', path)
+    if request.referrer == request.url_root:
+        if request.accept_languages:
+            return send_from_directory('js', path)
     return ''
 
 
